@@ -1,5 +1,5 @@
-const calculateFinancingParcel = require("./calculateFinancingParcel.cjs");
-const calculatingFinancing = require("./calculatingFinancing.cjs");
+const calculateFinancingParcel = require('./calculateFinancingParcel.cjs');
+const calculatingFinancing = require('./calculatingFinancing.cjs');
 
 module.exports = {
   calculateFinancingParcel,

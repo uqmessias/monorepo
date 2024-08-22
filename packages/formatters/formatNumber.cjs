@@ -1,6 +1,6 @@
-const formatMoney = require("./formatMoney.cjs");
-const formatMonths = require("./formatMonths.cjs");
-const formatPercentage = require("./formatPercentage.cjs");
+const formatMoney = require('./formatMoney.cjs');
+const formatMonths = require('./formatMonths.cjs');
+const formatPercentage = require('./formatPercentage.cjs');
 
 /**
  * @type {import("./index.cjs").FormatNumber<any>}
@@ -13,7 +13,7 @@ module.exports = function formatNumber(objetoComNumero) {
         /** @type {keyof typeof objetoComNumero} */
         objetoComNumero[propriedade];
 
-      if (propriedade.startsWith("valor")) {
+      if (propriedade.startsWith('valor')) {
         /** @type {NumeroFormatado<T>} */
         return {
           ...formatado,
@@ -21,7 +21,7 @@ module.exports = function formatNumber(objetoComNumero) {
         };
       }
 
-      if (propriedade.startsWith("percentual")) {
+      if (propriedade.startsWith('percentual')) {
         /** @type {NumeroFormatado<T>} */
         return {
           ...formatado,
@@ -29,7 +29,7 @@ module.exports = function formatNumber(objetoComNumero) {
         };
       }
 
-      if (propriedade.startsWith("meses")) {
+      if (propriedade.startsWith('meses')) {
         /** @type {NumeroFormatado<T>} */
         return {
           ...formatado,
@@ -40,7 +40,7 @@ module.exports = function formatNumber(objetoComNumero) {
       return formatado;
     },
     /** @type {NumeroFormatado<T>} */
-    objetoComNumero
+    objetoComNumero,
   );
 
   return dinheiroFormatado;

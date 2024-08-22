@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "calculate": "yarn workspace @monorepo/calculator-cli calculate",
-    "lint": "yarn workspace @monorepo/formatters lint && yarn workspace @monorepo/financing-calculator lint && yarn workspace @monorepo/calculator-cli lint"
+    "lint": "yarn workspace @monorepo/eslint-config-minimal lint; yarn workspace @monorepo/formatters lint; yarn workspace @monorepo/financing-calculator lint; yarn workspace @monorepo/calculator-cli lint",
+    "lint:fix": "yarn workspace @monorepo/eslint-config-minimal lint --fix; yarn workspace @monorepo/formatters lint --fix; yarn workspace @monorepo/financing-calculator lint --fix; yarn workspace @monorepo/calculator-cli lint --fix"
   },
   "workspaces": [
     "apps/*",

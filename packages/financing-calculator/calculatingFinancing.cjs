@@ -1,5 +1,5 @@
-const { formatMonths } = require("@monorepo/formatters");
-const calculateFinancingParcel = require("./calculateFinancingParcel.cjs");
+const { formatMonths } = require('@monorepo/formatters');
+const calculateFinancingParcel = require('./calculateFinancingParcel.cjs');
 
 /**
  *
@@ -15,14 +15,13 @@ module.exports = function calculatingFinancing(
   valorTotalImovelEntrada,
   mesesParaPagar,
   percentualCustoEfetivoTotalAnual,
-  valorDisponivelPorMesParaAmortizacao
+  valorDisponivelPorMesParaAmortizacao,
 ) {
   /** @type {import(".").CalcularFinanciamentoParcela[]} */
   const parcelasCalculadasComAmortizacao = [];
   /** @type {import(".").CalcularFinanciamentoParcela[]} */
   const parcelasCalculadasOriginalmente = [];
-  const percentualCustoEfetivoTotalMensal =
-    (1 + percentualCustoEfetivoTotalAnual) ** (1 / 12) - 1;
+  const percentualCustoEfetivoTotalMensal = (1 + percentualCustoEfetivoTotalAnual) ** (1 / 12) - 1;
   const valorTotalImovelFinanciado = valorTotalImovel - valorTotalImovelEntrada;
 
   let financiamentoCalculado = {
@@ -37,8 +36,7 @@ module.exports = function calculatingFinancing(
   };
 
   let valorDevedorTotalDepoisDestaParcelaOriginal = valorTotalImovelFinanciado;
-  let valorDevedorTotalDepoisDestaParcelaComAmortizacao =
-    valorTotalImovelFinanciado;
+  let valorDevedorTotalDepoisDestaParcelaComAmortizacao = valorTotalImovelFinanciado;
 
   for (let numero = 1; numero <= mesesParaPagar; numero++) {
     const parcelaOriginal = calculateFinancingParcel(
@@ -46,7 +44,7 @@ module.exports = function calculatingFinancing(
       mesesParaPagar,
       0,
       valorDevedorTotalDepoisDestaParcelaOriginal,
-      percentualCustoEfetivoTotalMensal
+      percentualCustoEfetivoTotalMensal,
     );
     valorDevedorTotalDepoisDestaParcelaOriginal =
       parcelaOriginal.valorDevedorTotalDepoisDestaParcela;
@@ -59,7 +57,7 @@ module.exports = function calculatingFinancing(
         mesesParaPagar,
         valorDisponivelPorMesParaAmortizacao,
         valorDevedorTotalDepoisDestaParcelaComAmortizacao,
-        percentualCustoEfetivoTotalMensal
+        percentualCustoEfetivoTotalMensal,
       );
 
       valorDevedorTotalDepoisDestaParcelaComAmortizacao =
@@ -68,23 +66,19 @@ module.exports = function calculatingFinancing(
     }
   }
 
-  const valorTotalImovelFinanciadoCalculado =
-    parcelasCalculadasOriginalmente.reduce(
-      (soma, { valorAPagarTotal }) => soma + valorAPagarTotal,
-      0
-    );
+  const valorTotalImovelFinanciadoCalculado = parcelasCalculadasOriginalmente.reduce(
+    (soma, { valorAPagarTotal }) => soma + valorAPagarTotal,
+    0,
+  );
   const valorTotalImovelFinanciadoCalculadoDepoisDasAmortizacoes =
     parcelasCalculadasComAmortizacao.reduce(
-      (soma, { valorAPagarTotalComAmortizacao }) =>
-        soma + valorAPagarTotalComAmortizacao,
-      0
+      (soma, { valorAPagarTotalComAmortizacao }) => soma + valorAPagarTotalComAmortizacao,
+      0,
     );
-  const mesesParaPagarDepoisDasAmortizacoes =
-    parcelasCalculadasComAmortizacao.length;
+  const mesesParaPagarDepoisDasAmortizacoes = parcelasCalculadasComAmortizacao.length;
 
   const percentualCustoEfetivoTotalComAmortizacoes =
-    (valorTotalImovelFinanciadoCalculadoDepoisDasAmortizacoes -
-      valorTotalImovelFinanciado) /
+    (valorTotalImovelFinanciadoCalculadoDepoisDasAmortizacoes - valorTotalImovelFinanciado) /
     valorTotalImovelFinanciado;
   const percentualCustoEfetivoTotalAnualCalculadoComAmortizacoes =
     (1 + percentualCustoEfetivoTotalComAmortizacoes) **
@@ -92,34 +86,25 @@ module.exports = function calculatingFinancing(
     1;
 
   const percentualCustoEfetivoTotal =
-    (valorTotalImovelFinanciadoCalculado - valorTotalImovelFinanciado) /
-    valorTotalImovelFinanciado;
+    (valorTotalImovelFinanciadoCalculado - valorTotalImovelFinanciado) / valorTotalImovelFinanciado;
 
   const percentualCustoEfetivoTotalAnualCalculado =
-    (1 + percentualCustoEfetivoTotal) **
-      (1 / (parcelasCalculadasOriginalmente.length / 12)) -
-    1;
+    (1 + percentualCustoEfetivoTotal) ** (1 / (parcelasCalculadasOriginalmente.length / 12)) - 1;
 
   const valorTotalImovelEconomizadoComAmortizacoes =
-    valorTotalImovelFinanciadoCalculado -
-    valorTotalImovelFinanciadoCalculadoDepoisDasAmortizacoes;
+    valorTotalImovelFinanciadoCalculado - valorTotalImovelFinanciadoCalculadoDepoisDasAmortizacoes;
 
-  if (
-    parcelasCalculadasComAmortizacao.length !==
-    parcelasCalculadasOriginalmente.length
-  ) {
+  if (parcelasCalculadasComAmortizacao.length !== parcelasCalculadasOriginalmente.length) {
     console.warn(
       `Estava planejado pagar em ${formatMonths(
-        parcelasCalculadasOriginalmente.length
-      )}, mas foi pago em ${formatMonths(
-        parcelasCalculadasComAmortizacao.length
-      )}`
+        parcelasCalculadasOriginalmente.length,
+      )}, mas foi pago em ${formatMonths(parcelasCalculadasComAmortizacao.length)}`,
     );
   }
 
   if (parcelasCalculadasOriginalmente.length !== mesesParaPagar) {
     throw new Error(
-      `A quantidade de parcelas fornecidas ("${mesesParaPagar}") é diferente das calculadas originalmente ("${parcelasCalculadasOriginalmente}")`
+      `A quantidade de parcelas fornecidas ("${mesesParaPagar}") é diferente das calculadas originalmente ("${parcelasCalculadasOriginalmente}")`,
     );
   }
 

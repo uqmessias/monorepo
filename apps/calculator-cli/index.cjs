@@ -1,22 +1,20 @@
-const { formatNumber } = require("@monorepo/formatters");
-const { calculatingFinancing } = require("@monorepo/financing-calculator");
+const { formatNumber } = require('@monorepo/formatters');
+const { calculatingFinancing } = require('@monorepo/financing-calculator');
 
 const resumoMapaDeChaves = {
-  mesesParaPagar: "Tempo proposto de pagamento",
-  mesesParaPagarDepoisDasAmortizacoes: "Tempo de pagamento amortizado",
-  valorTotalImovelFinanciado: "Valor financiado",
-  valorTotalImovelFinanciadoCalculado: "Valor pago no tempo proposto",
-  valorTotalImovelFinanciadoCalculadoDepoisDasAmortizacoes:
-    "Valor pago amortizado",
-  valorDisponivelPorMesParaAmortizacao: "Valor disponível para pagamento",
-  valorTotalImovelEconomizadoComAmortizacoes: "Economia por amortizar",
-  percentualCustoEfetivoTotal: "CET",
-  percentualCustoEfetivoTotalAnualCalculado: "CET calculado",
-  percentualCustoEfetivoTotalAnual: "CET / ano",
-  percentualCustoEfetivoTotalMensal: "CET / mês",
-  percentualCustoEfetivoTotalComAmortizacoes: "CET amortização",
-  percentualCustoEfetivoTotalAnualCalculadoComAmortizacoes:
-    "CET / ano calculado amortização",
+  mesesParaPagar: 'Tempo proposto de pagamento',
+  mesesParaPagarDepoisDasAmortizacoes: 'Tempo de pagamento amortizado',
+  valorTotalImovelFinanciado: 'Valor financiado',
+  valorTotalImovelFinanciadoCalculado: 'Valor pago no tempo proposto',
+  valorTotalImovelFinanciadoCalculadoDepoisDasAmortizacoes: 'Valor pago amortizado',
+  valorDisponivelPorMesParaAmortizacao: 'Valor disponível para pagamento',
+  valorTotalImovelEconomizadoComAmortizacoes: 'Economia por amortizar',
+  percentualCustoEfetivoTotal: 'CET',
+  percentualCustoEfetivoTotalAnualCalculado: 'CET calculado',
+  percentualCustoEfetivoTotalAnual: 'CET / ano',
+  percentualCustoEfetivoTotalMensal: 'CET / mês',
+  percentualCustoEfetivoTotalComAmortizacoes: 'CET amortização',
+  percentualCustoEfetivoTotalAnualCalculadoComAmortizacoes: 'CET / ano calculado amortização',
 };
 
 /**
@@ -35,7 +33,7 @@ function resumirInformacoes(financiamentoCalculado) {
 
   return Object.keys(
     /** @type {ResumoMapaDeChavesChaves[]} */
-    resumoMapaDeChaves
+    resumoMapaDeChaves,
   ).reduce(
     (financiamento, propriedade) => ({
       ...financiamento,
@@ -44,7 +42,7 @@ function resumirInformacoes(financiamentoCalculado) {
         financiamentoCalculadoFormatado[propriedade],
     }),
     /** @type {Record<ResumoMapaDeChaves[ResumoMapaDeChavesChaves], number>} */
-    {}
+    {},
   );
 }
 const valorTotalImovel = 250_000;
@@ -58,7 +56,7 @@ const financiamentoCalculado = calculatingFinancing(
   valorTotalImovelEntrada,
   mesesParaPagar,
   percentualCustoEfetivoTotalAnual,
-  valorDisponivelPorMesParaAmortizacao
+  valorDisponivelPorMesParaAmortizacao,
 );
 
 // eslint-disable-next-line
@@ -67,8 +65,8 @@ const parcelasResumidas = financiamentoCalculado.parcelas
   .concat(
     financiamentoCalculado.parcelas.slice(
       financiamentoCalculado.parcelas.length - 2,
-      financiamentoCalculado.parcelas.length
-    )
+      financiamentoCalculado.parcelas.length,
+    ),
   );
 const totalParcela = financiamentoCalculado.parcelas.length;
 // @ts-ignore

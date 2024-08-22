@@ -12,18 +12,15 @@ module.exports = function calculateFinancingParcel(
   mesesParaPagar,
   valorDisponivelPorMesParaAmortizacao,
   valorDevedorTotalDepoisDestaParcela,
-  percentualCustoEfetivoTotalMensal
+  percentualCustoEfetivoTotalMensal,
 ) {
   const parcelasRestantes = mesesParaPagar - (numero - 1);
   const valorAPagarAmortizacao =
     parcelasRestantes <= 0
       ? 0
-      : Math.floor(
-          (valorDevedorTotalDepoisDestaParcela / parcelasRestantes) * 100
-        ) / 100;
+      : Math.floor((valorDevedorTotalDepoisDestaParcela / parcelasRestantes) * 100) / 100;
 
-  const valorAPagarJuros =
-    valorDevedorTotalDepoisDestaParcela * percentualCustoEfetivoTotalMensal;
+  const valorAPagarJuros = valorDevedorTotalDepoisDestaParcela * percentualCustoEfetivoTotalMensal;
   const valorAPagarTotal = valorAPagarAmortizacao + valorAPagarJuros;
 
   const valorAPagarAmortizacaoExtra =
@@ -32,13 +29,12 @@ module.exports = function calculateFinancingParcel(
           0,
           Math.min(
             valorDevedorTotalDepoisDestaParcela,
-            valorDisponivelPorMesParaAmortizacao - valorAPagarTotal
-          )
+            valorDisponivelPorMesParaAmortizacao - valorAPagarTotal,
+          ),
         )
       : 0;
 
-  const valorAPagarTotalComAmortizacao =
-    valorAPagarTotal + valorAPagarAmortizacaoExtra;
+  const valorAPagarTotalComAmortizacao = valorAPagarTotal + valorAPagarAmortizacaoExtra;
 
   // Desconta o valor pago na parcela do mês
   if (valorDevedorTotalDepoisDestaParcela > 0) {
