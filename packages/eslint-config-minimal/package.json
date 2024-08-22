@@ -1,0 +1,13 @@
+{
+  "name": "@monorepo/eslint-config-minimal",
+  "version": "1.0.0",
+  "packageManager": "yarn@3.6.1",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@eslint/js": "^9.9.0",
+    "eslint": "^9.9.0",
+    "globals": "^15.9.0"
+  }
+}
