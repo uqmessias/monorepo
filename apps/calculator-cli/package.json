@@ -6,6 +6,7 @@
   },
   "packageManager": "yarn@3.6.1",
   "dependencies": {
+    "@monorepo/financing-calculator": "1.0.0",
     "@monorepo/formatters": "1.0.0"
   }
 }

@@ -1,4 +1,5 @@
 const { formatNumber } = require("@monorepo/formatters");
+const { calculatingFinancing } = require("@monorepo/financing-calculator");
 
 const resumoMapaDeChaves = {
   mesesParaPagar: "Tempo proposto de pagamento",
@@ -46,20 +47,30 @@ function resumirInformacoes(financiamentoCalculado) {
     {}
   );
 }
-
 const valorTotalImovel = 250_000;
 const valorTotalImovelEntrada = 120_000;
 const mesesParaPagar = 12 * 30;
 const percentualCustoEfetivoTotalAnual = 11.66 / 100;
 const valorDisponivelPorMesParaAmortizacao = 3_000;
 
-const tableWithBasicInfo = {
+const financiamentoCalculado = calculatingFinancing(
   valorTotalImovel,
   valorTotalImovelEntrada,
   mesesParaPagar,
   percentualCustoEfetivoTotalAnual,
-  valorDisponivelPorMesParaAmortizacao,
-};
+  valorDisponivelPorMesParaAmortizacao
+);
+const parcelasResumidas = financiamentoCalculado.parcelas
+  .slice(0, 1)
+  .concat(
+    financiamentoCalculado.parcelas.slice(
+      financiamentoCalculado.parcelas.length - 2,
+      financiamentoCalculado.parcelas.length
+    )
+  );
+const totalParcela = financiamentoCalculado.parcelas.length;
+// @ts-ignore
+delete financiamentoCalculado.parcelas;
 
-console.log("\nINFORMAÇÕES BÁSICAS");
-console.table(resumirInformacoes(tableWithBasicInfo));
+console.log(`\nINFORMAÇÕES BÁSICAS ${totalParcela}`);
+console.table(resumirInformacoes(financiamentoCalculado));

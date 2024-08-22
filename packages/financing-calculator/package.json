@@ -1,0 +1,10 @@
+{
+  "name": "@monorepo/financing-calculator",
+  "version": "1.0.0",
+  "main": "./index.cjs",
+  "types": "./index.d.ts",
+  "packageManager": "yarn@3.6.1",
+  "peerDependencies": {
+    "@monorepo/formatters": "workspace:^"
+  }
+}
