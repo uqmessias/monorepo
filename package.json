@@ -5,7 +5,8 @@
   "packageManager": "yarn@3.6.1",
   "private": true,
   "scripts": {
-    "calculate": "yarn workspace @monorepo/calculator-cli calculate"
+    "calculate": "yarn workspace @monorepo/calculator-cli calculate",
+    "lint": "yarn workspace @monorepo/formatters lint && yarn workspace @monorepo/financing-calculator lint && yarn workspace @monorepo/calculator-cli lint"
   },
   "workspaces": [
     "apps/*",

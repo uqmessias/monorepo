@@ -83,12 +83,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monorepo/calculator-cli@workspace:apps/calculator-cli"
   dependencies:
+    "@monorepo/eslint-config-minimal": "workspace:^"
     "@monorepo/financing-calculator": 1.0.0
     "@monorepo/formatters": 1.0.0
+    eslint: ^9.9.0
   languageName: unknown
   linkType: soft
 
-"@monorepo/eslint-config-minimal@workspace:packages/eslint-config-minimal":
+"@monorepo/eslint-config-minimal@workspace:^, @monorepo/eslint-config-minimal@workspace:packages/eslint-config-minimal":
   version: 0.0.0-use.local
   resolution: "@monorepo/eslint-config-minimal@workspace:packages/eslint-config-minimal"
   dependencies:
@@ -101,6 +103,9 @@ __metadata:
 "@monorepo/financing-calculator@1.0.0, @monorepo/financing-calculator@workspace:packages/financing-calculator":
   version: 0.0.0-use.local
   resolution: "@monorepo/financing-calculator@workspace:packages/financing-calculator"
+  dependencies:
+    "@monorepo/eslint-config-minimal": "workspace:^"
+    eslint: ^9.9.0
   peerDependencies:
     "@monorepo/formatters": "workspace:^"
   languageName: unknown
@@ -109,6 +114,9 @@ __metadata:
 "@monorepo/formatters@1.0.0, @monorepo/formatters@workspace:packages/formatters":
   version: 0.0.0-use.local
   resolution: "@monorepo/formatters@workspace:packages/formatters"
+  dependencies:
+    "@monorepo/eslint-config-minimal": "workspace:^"
+    eslint: ^9.9.0
   languageName: unknown
   linkType: soft
 

@@ -60,6 +60,8 @@ const financiamentoCalculado = calculatingFinancing(
   percentualCustoEfetivoTotalAnual,
   valorDisponivelPorMesParaAmortizacao
 );
+
+// eslint-disable-next-line
 const parcelasResumidas = financiamentoCalculado.parcelas
   .slice(0, 1)
   .concat(

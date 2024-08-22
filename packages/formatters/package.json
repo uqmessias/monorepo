@@ -3,5 +3,12 @@
   "version": "1.0.0",
   "main": "./index.cjs",
   "types": "./index.d.ts",
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@3.6.1",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@monorepo/eslint-config-minimal": "workspace:^",
+    "eslint": "^9.9.0"
+  }
 }

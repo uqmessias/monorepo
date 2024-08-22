@@ -2,11 +2,16 @@
   "name": "@monorepo/calculator-cli",
   "version": "1.0.0",
   "scripts": {
-    "calculate": "node index.cjs"
+    "calculate": "node index.cjs",
+    "lint": "eslint ."
   },
   "packageManager": "yarn@3.6.1",
   "dependencies": {
     "@monorepo/financing-calculator": "1.0.0",
     "@monorepo/formatters": "1.0.0"
+  },
+  "devDependencies": {
+    "@monorepo/eslint-config-minimal": "workspace:^",
+    "eslint": "^9.9.0"
   }
 }

@@ -2,6 +2,7 @@
   "name": "@monorepo/eslint-config-minimal",
   "version": "1.0.0",
   "packageManager": "yarn@3.6.1",
+  "main": "./index.cjs",
   "scripts": {
     "lint": "eslint ."
   },
