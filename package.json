@@ -3,5 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "packageManager": "yarn@3.6.1",
-  "private": true
+  "private": true,
+  "scripts": {
+    "calculate": "yarn workspace @monorepo/calculator-cli calculate"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

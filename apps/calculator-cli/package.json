@@ -1,0 +1,11 @@
+{
+  "name": "@monorepo/calculator-cli",
+  "version": "1.0.0",
+  "scripts": {
+    "calculate": "node index.cjs"
+  },
+  "packageManager": "yarn@3.6.1",
+  "dependencies": {
+    "@monorepo/formatters": "1.0.0"
+  }
+}
