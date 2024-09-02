@@ -13,6 +13,10 @@ module.exports = function formatNumber(objetoComNumero) {
         /** @type {keyof typeof objetoComNumero} */
         objetoComNumero[propriedade];
 
+      if (Number.isNaN(numero) || numero === undefined || propriedade === undefined) {
+        return formatado;
+      }
+
       if (propriedade.startsWith('valor')) {
         /** @type {NumeroFormatado<T>} */
         return {

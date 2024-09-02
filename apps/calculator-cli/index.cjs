@@ -17,6 +17,15 @@ const resumoMapaDeChaves = {
   percentualCustoEfetivoTotalMensal: 'CET / mês',
   percentualCustoEfetivoTotalComAmortizacoes: 'CET amortização',
   percentualCustoEfetivoTotalAnualCalculadoComAmortizacoes: 'CET / ano calculado amortização',
+
+  // Dados da parcela
+  numero: 'Parcela',
+  valorAPagarJuros: 'Valor pago em juros',
+  valorAPagarAmortizacao: 'Valor da amortização',
+  valorAPagarAmortizacaoExtra: 'Valor extra da amortização',
+  valorAPagarTotal: 'Valor total da parcela',
+  valorAPagarTotalComAmortizacao: 'Valor pago no mês',
+  valorDevedorTotalDepoisDestaParcela: 'Valor total devedor',
 };
 
 /**
@@ -37,12 +46,22 @@ function resumirInformacoes(financiamentoCalculado) {
     /** @type {ResumoMapaDeChavesChaves[]} */
     resumoMapaDeChaves,
   ).reduce(
-    (financiamento, propriedade) => ({
-      ...financiamento,
-      [resumoMapaDeChaves[propriedade]]:
-        /** @type {keyof typeof financiamentoCalculadoFormatado} */
-        financiamentoCalculadoFormatado[propriedade],
-    }),
+    (financiamento, propriedade) => {
+      if (
+        propriedade === undefined ||
+        resumoMapaDeChaves[propriedade] === undefined ||
+        financiamentoCalculadoFormatado[propriedade] === undefined
+      ) {
+        return financiamento;
+      }
+
+      return {
+        ...financiamento,
+        [resumoMapaDeChaves[propriedade]]:
+          /** @type {keyof typeof financiamentoCalculadoFormatado} */
+          financiamentoCalculadoFormatado[propriedade],
+      };
+    },
     /** @type {Record<ResumoMapaDeChaves[ResumoMapaDeChavesChaves], number>} */
     {},
   );
@@ -73,8 +92,10 @@ async function cli() {
         financiamentoCalculado.parcelas.length - 2,
         financiamentoCalculado.parcelas.length,
       ),
-    );
+    )
+    .map(resumirInformacoes);
   const totalParcela = financiamentoCalculado.parcelas.length;
+  console.table(parcelasResumidas);
   // @ts-ignore
   delete financiamentoCalculado.parcelas;
 
