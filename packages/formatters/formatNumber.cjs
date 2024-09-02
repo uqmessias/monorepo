@@ -3,7 +3,7 @@ const formatMonths = require('./formatMonths.cjs');
 const formatPercentage = require('./formatPercentage.cjs');
 
 /**
- * @type {import("./index.cjs").FormatNumber<any>}
+ * @type {import(".").FormatNumber<any>}
  */
 module.exports = function formatNumber(objetoComNumero) {
   const dinheiroFormatado = Object.keys(objetoComNumero).reduce(

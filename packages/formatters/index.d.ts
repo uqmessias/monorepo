@@ -16,5 +16,5 @@ export type FormatNumber<T extends Record<string, number>> = (
 
 export function formatMoney(num: number): string;
 export function formatMonths(num: number): string;
-export function formatNumber<T>(num: number): FormatNumber<T>;
+export function formatNumber<T>(objetoComNumero: T): FormatNumber<T>;
 export function formatPercentage(num: number): string;
