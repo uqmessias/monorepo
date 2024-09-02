@@ -9,7 +9,7 @@ const resumoMapaDeChaves = {
   valorTotalImovelFinanciado: 'Valor financiado',
   valorTotalImovelFinanciadoCalculado: 'Valor pago no tempo proposto',
   valorTotalImovelFinanciadoCalculadoDepoisDasAmortizacoes: 'Valor pago amortizado',
-  valorDisponivelPorMesParaAmortizacao: 'Valor disponível para pagamento',
+  valorDisponivelPorMesParaAmortizacao: 'Valor disponível para amortização',
   valorTotalImovelEconomizadoComAmortizacoes: 'Economia por amortizar',
   percentualCustoEfetivoTotal: 'CET',
   percentualCustoEfetivoTotalAnualCalculado: 'CET calculado',
@@ -54,7 +54,7 @@ async function cli() {
   const mesesParaPagar = await askSimpleNumberFormat('Em quantos meses pretende financiar?');
   const percentualCustoEfetivoTotalAnual = await askPercentageFormat('Qual é o CET anual?');
   const valorDisponivelPorMesParaAmortizacao = await askMoneyFormat(
-    'Qual é o valor disponível para pagar parcelas e amortização por mês?',
+    'Qual é o valor disponível para pagar as amortizações por mês?',
   );
 
   const financiamentoCalculado = calculatingFinancing(

@@ -37,11 +37,12 @@ module.exports = function calculatingFinancing(
 
   let valorDevedorTotalDepoisDestaParcelaOriginal = valorTotalImovelFinanciado;
   let valorDevedorTotalDepoisDestaParcelaComAmortizacao = valorTotalImovelFinanciado;
+  const valorAPagarAmortizacao = valorTotalImovelFinanciado / mesesParaPagar;
 
   for (let numero = 1; numero <= mesesParaPagar; numero++) {
     const parcelaOriginal = calculateFinancingParcel(
       numero,
-      mesesParaPagar,
+      valorAPagarAmortizacao,
       0,
       valorDevedorTotalDepoisDestaParcelaOriginal,
       percentualCustoEfetivoTotalMensal,
@@ -54,7 +55,7 @@ module.exports = function calculatingFinancing(
     if (valorDevedorTotalDepoisDestaParcelaComAmortizacao > 0) {
       const parcelaComAmortizacao = calculateFinancingParcel(
         numero,
-        mesesParaPagar,
+        valorAPagarAmortizacao,
         valorDisponivelPorMesParaAmortizacao,
         valorDevedorTotalDepoisDestaParcelaComAmortizacao,
         percentualCustoEfetivoTotalMensal,
