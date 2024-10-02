@@ -1,4 +1,4 @@
-const { formatNumber } = require('@monorepo/formatters');
+const { formatNumber, formatMoney } = require('@monorepo/formatters');
 const { calculatingFinancing } = require('@monorepo/financing-calculator');
 
 const { askMoneyFormat, askSimpleNumberFormat, askPercentageFormat, ask } = require('./io.cjs');
@@ -72,8 +72,16 @@ async function cli() {
   const valorTotalImovelEntrada = await askMoneyFormat('Qual é o valor de entrada?');
   const mesesParaPagar = await askSimpleNumberFormat('Em quantos meses pretende financiar?');
   const percentualCustoEfetivoTotalAnual = await askPercentageFormat('Qual é o CET anual?');
+  const valorDaPrimeiraParcela = calculatingFinancing(
+    valorTotalImovel,
+    valorTotalImovelEntrada,
+    mesesParaPagar,
+    percentualCustoEfetivoTotalAnual,
+    0,
+  ).parcelas[0].valorAPagarTotal;
   const valorDisponivelPorMesParaAmortizacao = await askMoneyFormat(
     'Qual é o valor disponível para pagar as amortizações por mês?',
+    `(o valor da primeira parcela é: ${formatMoney(valorDaPrimeiraParcela)})`,
   );
 
   const financiamentoCalculado = calculatingFinancing(
